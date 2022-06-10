@@ -1,6 +1,6 @@
 {
   "name": "@ionistor/jcc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Minecraft protocol Json Chat Component",
   "main": "lib/index.js",
   "repository": "https://github.com/IonistorMC/jcc",
