@@ -15,3 +15,15 @@ import { JSONChatComponent } from '@ionistor/jcc'
 
 const jsonChatComponent = new JSONChatComponent() // Local instance
 ```
+
+## Parse
+```ts
+import { JSONChatComponent } from '@ionistor/jcc'
+
+const jcc = JSONChatComponent.parse('{"text":"Hello World!","color":"green","bold":true}')
+
+jcc.getColor() // green
+jcc.getText() // Hello World
+jcc.isBold // true
+jcc.hasExtra() // false
+```

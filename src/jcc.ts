@@ -1,5 +1,19 @@
 import chalk from 'chalk'
 
+export interface JCCClickEvent {
+  openUrl?: string
+  runCommand?: string
+  suggestCommand?: string
+  changePage?: number
+  copyToClipboard?: string
+}
+
+export interface JCCHoverEvent {
+  showText?: string
+  showItem?: string
+  showEntity?: string
+}
+
 export class JSONChatComponent {
   #text?: string
   #bold?: boolean
@@ -325,6 +339,76 @@ export class JSONChatComponent {
     this.#extra = undefined
     this.#insertion = undefined
     return this
+  }
+
+  get isBold(): boolean {
+    return !!this.#bold
+  }
+
+  get isItalic(): boolean {
+    return !!this.#italic
+  }
+
+  get isUnderlined(): boolean {
+    return !!this.#underlined
+  }
+
+  get isStrikethrough(): boolean {
+    return !!this.#strikethrough
+  }
+
+  get isObfuscated(): boolean {
+    return !!this.#obfuscated
+  }
+
+  hasColor(): boolean {
+    return !!this.#color
+  }
+
+  hasClickEvent(type?: 'open_url' | 'run_command' | 'suggest_command' | 'change_page' | 'copy_to_clipboard'): boolean {
+    return type ? !!this.#clickEvent?.[type] : !!this.#clickEvent
+  }
+
+  hasHoverEvent(type?: 'show_text' | 'show_item' | 'show_entity'): boolean {
+    return type ? !!this.#hoverEvent?.[type] : !!this.#hoverEvent
+  }
+
+  hasInsertion(): boolean {
+    return !!this.#insertion
+  }
+
+  hasExtra(): boolean {
+    return !!this.#extra
+  }
+
+  get extra(): JSONChatComponent[] | undefined {
+    return this.#extra
+  }
+
+  getColor(): string | undefined {
+    return this.#color
+  }
+
+  getText(): string | undefined {
+    return this.#text
+  }
+
+  getClickEvent(): JCCClickEvent | undefined {
+    return this.#clickEvent ? {
+      openUrl: this.#clickEvent?.open_url,
+      runCommand: this.#clickEvent?.run_command,
+      suggestCommand: this.#clickEvent?.suggest_command,
+      changePage: this.#clickEvent?.change_page,
+      copyToClipboard: this.#clickEvent?.copy_to_clipboard
+    } : undefined
+  }
+
+  getHoverEvent(): JCCHoverEvent | undefined {
+    return this.#hoverEvent ? {
+      showText: this.#hoverEvent?.show_text,
+      showItem: this.#hoverEvent?.show_item,
+      showEntity: this.#hoverEvent?.show_entity
+    } : undefined
   }
 }
 
